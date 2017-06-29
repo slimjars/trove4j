@@ -21,8 +21,6 @@ package gnu.trove.queue;
 
 import gnu.trove.TDoubleCollection;
 
-import java.io.Serializable;
-
 /**
  * Interface for Trove queue implementations.
  *

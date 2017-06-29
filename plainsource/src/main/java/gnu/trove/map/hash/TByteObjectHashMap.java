@@ -29,7 +29,6 @@ import gnu.trove.procedure.TByteProcedure;
 import gnu.trove.procedure.TObjectProcedure;
 import gnu.trove.iterator.TByteIterator;
 import gnu.trove.iterator.TByteObjectIterator;
-import gnu.trove.iterator.TPrimitiveIterator;
 import gnu.trove.function.TObjectFunction;
 import gnu.trove.set.TByteSet;
 import gnu.trove.TByteCollection;

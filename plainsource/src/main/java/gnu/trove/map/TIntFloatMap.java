@@ -30,7 +30,6 @@ import gnu.trove.set.*;
 import gnu.trove.TFloatCollection;
 
 import java.util.Map;
-import java.io.Serializable;
 
 
 /**

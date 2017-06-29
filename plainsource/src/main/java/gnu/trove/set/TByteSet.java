@@ -31,7 +31,6 @@ import gnu.trove.TByteCollection;
 
 import java.util.Collection;
 import java.util.Set;
-import java.io.Serializable;
 
 /**
  * An implementation of the <tt>Set</tt> interface that uses an

@@ -25,7 +25,7 @@ package gnu.trove.stack;
 // THIS IS A GENERATED CLASS. DO NOT HAND EDIT! //
 //////////////////////////////////////////////////
 
-import java.io.Serializable;
+
 
 
 /**

@@ -28,7 +28,6 @@ import gnu.trove.function.*;
 import gnu.trove.procedure.*;
 import gnu.trove.TCharCollection;
 
-import java.io.Serializable;
 import java.util.Random;
 
 

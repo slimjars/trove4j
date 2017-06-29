@@ -29,7 +29,6 @@ import gnu.trove.procedure.TDoubleProcedure;
 import gnu.trove.procedure.TObjectProcedure;
 import gnu.trove.iterator.TDoubleIterator;
 import gnu.trove.iterator.TDoubleObjectIterator;
-import gnu.trove.iterator.TPrimitiveIterator;
 import gnu.trove.function.TObjectFunction;
 import gnu.trove.set.TDoubleSet;
 import gnu.trove.TDoubleCollection;
