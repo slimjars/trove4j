@@ -69,7 +69,7 @@ public class TUnmodifiableCharDoubleMap implements TCharDoubleMap, Serializable 
 
 	public TCharSet keySet() {
 		if ( keySet == null )
-			keySet = TCollections.unmodifiableSet( m.keySet() );
+			keySet = new TUnmodifiableCharSet( m.keySet() );
 		return keySet;
 	}
 	public char[] keys() { return m.keys(); }
@@ -77,7 +77,7 @@ public class TUnmodifiableCharDoubleMap implements TCharDoubleMap, Serializable 
 
 	public TDoubleCollection valueCollection() {
 		if ( values == null )
-			values = TCollections.unmodifiableCollection( m.valueCollection() );
+			values = new TUnmodifiableDoubleCollection( m.valueCollection() );
 		return values;
 	}
 	public double[] values() { return m.values(); }

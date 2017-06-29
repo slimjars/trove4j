@@ -69,7 +69,7 @@ public class TUnmodifiableDoubleObjectMap<V> implements TDoubleObjectMap<V>, Ser
 
 	public TDoubleSet keySet() {
 		if ( keySet == null )
-			keySet = TCollections.unmodifiableSet( m.keySet() );
+			keySet = new TUnmodifiableDoubleSet( m.keySet() );
 		return keySet;
 	}
 	public double[] keys() { return m.keys(); }

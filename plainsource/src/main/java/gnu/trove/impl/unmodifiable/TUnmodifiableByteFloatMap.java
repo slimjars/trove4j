@@ -69,7 +69,7 @@ public class TUnmodifiableByteFloatMap implements TByteFloatMap, Serializable {
 
 	public TByteSet keySet() {
 		if ( keySet == null )
-			keySet = TCollections.unmodifiableSet( m.keySet() );
+			keySet = new TUnmodifiableByteSet( m.keySet() );
 		return keySet;
 	}
 	public byte[] keys() { return m.keys(); }
@@ -77,7 +77,7 @@ public class TUnmodifiableByteFloatMap implements TByteFloatMap, Serializable {
 
 	public TFloatCollection valueCollection() {
 		if ( values == null )
-			values = TCollections.unmodifiableCollection( m.valueCollection() );
+			values = new TUnmodifiableFloatCollection( m.valueCollection() );
 		return values;
 	}
 	public float[] values() { return m.values(); }

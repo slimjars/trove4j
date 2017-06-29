@@ -69,7 +69,7 @@ public class TUnmodifiableIntIntMap implements TIntIntMap, Serializable {
 
 	public TIntSet keySet() {
 		if ( keySet == null )
-			keySet = TCollections.unmodifiableSet( m.keySet() );
+			keySet = new TUnmodifiableIntSet( m.keySet() );
 		return keySet;
 	}
 	public int[] keys() { return m.keys(); }
@@ -77,7 +77,7 @@ public class TUnmodifiableIntIntMap implements TIntIntMap, Serializable {
 
 	public TIntCollection valueCollection() {
 		if ( values == null )
-			values = TCollections.unmodifiableCollection( m.valueCollection() );
+			values = new TUnmodifiableIntCollection( m.valueCollection() );
 		return values;
 	}
 	public int[] values() { return m.values(); }

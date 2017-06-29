@@ -69,7 +69,7 @@ public class TUnmodifiableDoubleIntMap implements TDoubleIntMap, Serializable {
 
 	public TDoubleSet keySet() {
 		if ( keySet == null )
-			keySet = TCollections.unmodifiableSet( m.keySet() );
+			keySet = new TUnmodifiableDoubleSet( m.keySet() );
 		return keySet;
 	}
 	public double[] keys() { return m.keys(); }
@@ -77,7 +77,7 @@ public class TUnmodifiableDoubleIntMap implements TDoubleIntMap, Serializable {
 
 	public TIntCollection valueCollection() {
 		if ( values == null )
-			values = TCollections.unmodifiableCollection( m.valueCollection() );
+			values = new TUnmodifiableIntCollection( m.valueCollection() );
 		return values;
 	}
 	public int[] values() { return m.values(); }

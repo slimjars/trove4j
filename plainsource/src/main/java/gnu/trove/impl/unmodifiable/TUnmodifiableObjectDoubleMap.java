@@ -76,7 +76,7 @@ public class TUnmodifiableObjectDoubleMap<K> implements TObjectDoubleMap<K>, Ser
 
 	public TDoubleCollection valueCollection() {
 		if ( values == null )
-			values = TCollections.unmodifiableCollection( m.valueCollection() );
+			values = new TUnmodifiableDoubleCollection( m.valueCollection() );
 		return values;
 	}
 	public double[] values() { return m.values(); }

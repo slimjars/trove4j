@@ -69,7 +69,7 @@ public class TUnmodifiableShortShortMap implements TShortShortMap, Serializable 
 
 	public TShortSet keySet() {
 		if ( keySet == null )
-			keySet = TCollections.unmodifiableSet( m.keySet() );
+			keySet = new TUnmodifiableShortSet( m.keySet() );
 		return keySet;
 	}
 	public short[] keys() { return m.keys(); }
@@ -77,7 +77,7 @@ public class TUnmodifiableShortShortMap implements TShortShortMap, Serializable 
 
 	public TShortCollection valueCollection() {
 		if ( values == null )
-			values = TCollections.unmodifiableCollection( m.valueCollection() );
+			values = new TUnmodifiableShortCollection( m.valueCollection() );
 		return values;
 	}
 	public short[] values() { return m.values(); }

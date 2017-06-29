@@ -69,7 +69,7 @@ public class TUnmodifiableCharFloatMap implements TCharFloatMap, Serializable {
 
 	public TCharSet keySet() {
 		if ( keySet == null )
-			keySet = TCollections.unmodifiableSet( m.keySet() );
+			keySet = new TUnmodifiableCharSet( m.keySet() );
 		return keySet;
 	}
 	public char[] keys() { return m.keys(); }
@@ -77,7 +77,7 @@ public class TUnmodifiableCharFloatMap implements TCharFloatMap, Serializable {
 
 	public TFloatCollection valueCollection() {
 		if ( values == null )
-			values = TCollections.unmodifiableCollection( m.valueCollection() );
+			values = new TUnmodifiableFloatCollection( m.valueCollection() );
 		return values;
 	}
 	public float[] values() { return m.values(); }

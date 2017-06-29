@@ -69,7 +69,7 @@ public class TUnmodifiableFloatObjectMap<V> implements TFloatObjectMap<V>, Seria
 
 	public TFloatSet keySet() {
 		if ( keySet == null )
-			keySet = TCollections.unmodifiableSet( m.keySet() );
+			keySet = new TUnmodifiableFloatSet( m.keySet() );
 		return keySet;
 	}
 	public float[] keys() { return m.keys(); }

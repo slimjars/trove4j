@@ -69,7 +69,7 @@ public class TUnmodifiableByteShortMap implements TByteShortMap, Serializable {
 
 	public TByteSet keySet() {
 		if ( keySet == null )
-			keySet = TCollections.unmodifiableSet( m.keySet() );
+			keySet = new TUnmodifiableByteSet( m.keySet() );
 		return keySet;
 	}
 	public byte[] keys() { return m.keys(); }
@@ -77,7 +77,7 @@ public class TUnmodifiableByteShortMap implements TByteShortMap, Serializable {
 
 	public TShortCollection valueCollection() {
 		if ( values == null )
-			values = TCollections.unmodifiableCollection( m.valueCollection() );
+			values = new TUnmodifiableShortCollection( m.valueCollection() );
 		return values;
 	}
 	public short[] values() { return m.values(); }

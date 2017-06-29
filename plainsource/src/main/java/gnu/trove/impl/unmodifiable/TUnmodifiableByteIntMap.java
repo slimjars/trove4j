@@ -69,7 +69,7 @@ public class TUnmodifiableByteIntMap implements TByteIntMap, Serializable {
 
 	public TByteSet keySet() {
 		if ( keySet == null )
-			keySet = TCollections.unmodifiableSet( m.keySet() );
+			keySet = new TUnmodifiableByteSet( m.keySet() );
 		return keySet;
 	}
 	public byte[] keys() { return m.keys(); }
@@ -77,7 +77,7 @@ public class TUnmodifiableByteIntMap implements TByteIntMap, Serializable {
 
 	public TIntCollection valueCollection() {
 		if ( values == null )
-			values = TCollections.unmodifiableCollection( m.valueCollection() );
+			values = new TUnmodifiableIntCollection( m.valueCollection() );
 		return values;
 	}
 	public int[] values() { return m.values(); }

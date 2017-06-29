@@ -69,7 +69,7 @@ public class TUnmodifiableFloatLongMap implements TFloatLongMap, Serializable {
 
 	public TFloatSet keySet() {
 		if ( keySet == null )
-			keySet = TCollections.unmodifiableSet( m.keySet() );
+			keySet = new TUnmodifiableFloatSet( m.keySet() );
 		return keySet;
 	}
 	public float[] keys() { return m.keys(); }
@@ -77,7 +77,7 @@ public class TUnmodifiableFloatLongMap implements TFloatLongMap, Serializable {
 
 	public TLongCollection valueCollection() {
 		if ( values == null )
-			values = TCollections.unmodifiableCollection( m.valueCollection() );
+			values = new TUnmodifiableLongCollection( m.valueCollection() );
 		return values;
 	}
 	public long[] values() { return m.values(); }

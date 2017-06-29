@@ -69,7 +69,7 @@ public class TUnmodifiableCharObjectMap<V> implements TCharObjectMap<V>, Seriali
 
 	public TCharSet keySet() {
 		if ( keySet == null )
-			keySet = TCollections.unmodifiableSet( m.keySet() );
+			keySet = new TUnmodifiableCharSet( m.keySet() );
 		return keySet;
 	}
 	public char[] keys() { return m.keys(); }

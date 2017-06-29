@@ -69,7 +69,7 @@ public class TUnmodifiableLongByteMap implements TLongByteMap, Serializable {
 
 	public TLongSet keySet() {
 		if ( keySet == null )
-			keySet = TCollections.unmodifiableSet( m.keySet() );
+			keySet = new TUnmodifiableLongSet( m.keySet() );
 		return keySet;
 	}
 	public long[] keys() { return m.keys(); }
@@ -77,7 +77,7 @@ public class TUnmodifiableLongByteMap implements TLongByteMap, Serializable {
 
 	public TByteCollection valueCollection() {
 		if ( values == null )
-			values = TCollections.unmodifiableCollection( m.valueCollection() );
+			values = new TUnmodifiableByteCollection( m.valueCollection() );
 		return values;
 	}
 	public byte[] values() { return m.values(); }

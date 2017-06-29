@@ -69,7 +69,7 @@ public class TUnmodifiableCharByteMap implements TCharByteMap, Serializable {
 
 	public TCharSet keySet() {
 		if ( keySet == null )
-			keySet = TCollections.unmodifiableSet( m.keySet() );
+			keySet = new TUnmodifiableCharSet( m.keySet() );
 		return keySet;
 	}
 	public char[] keys() { return m.keys(); }
@@ -77,7 +77,7 @@ public class TUnmodifiableCharByteMap implements TCharByteMap, Serializable {
 
 	public TByteCollection valueCollection() {
 		if ( values == null )
-			values = TCollections.unmodifiableCollection( m.valueCollection() );
+			values = new TUnmodifiableByteCollection( m.valueCollection() );
 		return values;
 	}
 	public byte[] values() { return m.values(); }

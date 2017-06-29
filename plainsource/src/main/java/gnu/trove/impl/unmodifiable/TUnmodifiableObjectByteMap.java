@@ -76,7 +76,7 @@ public class TUnmodifiableObjectByteMap<K> implements TObjectByteMap<K>, Seriali
 
 	public TByteCollection valueCollection() {
 		if ( values == null )
-			values = TCollections.unmodifiableCollection( m.valueCollection() );
+			values = new TUnmodifiableByteCollection( m.valueCollection() );
 		return values;
 	}
 	public byte[] values() { return m.values(); }

@@ -76,7 +76,7 @@ public class TUnmodifiableObjectFloatMap<K> implements TObjectFloatMap<K>, Seria
 
 	public TFloatCollection valueCollection() {
 		if ( values == null )
-			values = TCollections.unmodifiableCollection( m.valueCollection() );
+			values = new TUnmodifiableFloatCollection( m.valueCollection() );
 		return values;
 	}
 	public float[] values() { return m.values(); }

@@ -76,7 +76,7 @@ public class TUnmodifiableObjectIntMap<K> implements TObjectIntMap<K>, Serializa
 
 	public TIntCollection valueCollection() {
 		if ( values == null )
-			values = TCollections.unmodifiableCollection( m.valueCollection() );
+			values = new TUnmodifiableIntCollection( m.valueCollection() );
 		return values;
 	}
 	public int[] values() { return m.values(); }

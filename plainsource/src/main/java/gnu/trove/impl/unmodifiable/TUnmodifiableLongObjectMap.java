@@ -69,7 +69,7 @@ public class TUnmodifiableLongObjectMap<V> implements TLongObjectMap<V>, Seriali
 
 	public TLongSet keySet() {
 		if ( keySet == null )
-			keySet = TCollections.unmodifiableSet( m.keySet() );
+			keySet = new TUnmodifiableLongSet( m.keySet() );
 		return keySet;
 	}
 	public long[] keys() { return m.keys(); }

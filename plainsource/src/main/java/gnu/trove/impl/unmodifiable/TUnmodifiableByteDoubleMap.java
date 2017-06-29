@@ -69,7 +69,7 @@ public class TUnmodifiableByteDoubleMap implements TByteDoubleMap, Serializable 
 
 	public TByteSet keySet() {
 		if ( keySet == null )
-			keySet = TCollections.unmodifiableSet( m.keySet() );
+			keySet = new TUnmodifiableByteSet( m.keySet() );
 		return keySet;
 	}
 	public byte[] keys() { return m.keys(); }
@@ -77,7 +77,7 @@ public class TUnmodifiableByteDoubleMap implements TByteDoubleMap, Serializable 
 
 	public TDoubleCollection valueCollection() {
 		if ( values == null )
-			values = TCollections.unmodifiableCollection( m.valueCollection() );
+			values = new TUnmodifiableDoubleCollection( m.valueCollection() );
 		return values;
 	}
 	public double[] values() { return m.values(); }

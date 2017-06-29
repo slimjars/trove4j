@@ -69,7 +69,7 @@ public class TUnmodifiableFloatDoubleMap implements TFloatDoubleMap, Serializabl
 
 	public TFloatSet keySet() {
 		if ( keySet == null )
-			keySet = TCollections.unmodifiableSet( m.keySet() );
+			keySet = new TUnmodifiableFloatSet( m.keySet() );
 		return keySet;
 	}
 	public float[] keys() { return m.keys(); }
@@ -77,7 +77,7 @@ public class TUnmodifiableFloatDoubleMap implements TFloatDoubleMap, Serializabl
 
 	public TDoubleCollection valueCollection() {
 		if ( values == null )
-			values = TCollections.unmodifiableCollection( m.valueCollection() );
+			values = new TUnmodifiableDoubleCollection( m.valueCollection() );
 		return values;
 	}
 	public double[] values() { return m.values(); }

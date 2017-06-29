@@ -76,7 +76,7 @@ public class TUnmodifiableObjectShortMap<K> implements TObjectShortMap<K>, Seria
 
 	public TShortCollection valueCollection() {
 		if ( values == null )
-			values = TCollections.unmodifiableCollection( m.valueCollection() );
+			values = new TUnmodifiableShortCollection( m.valueCollection() );
 		return values;
 	}
 	public short[] values() { return m.values(); }

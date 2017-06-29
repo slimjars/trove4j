@@ -76,7 +76,7 @@ public class TUnmodifiableObjectCharMap<K> implements TObjectCharMap<K>, Seriali
 
 	public TCharCollection valueCollection() {
 		if ( values == null )
-			values = TCollections.unmodifiableCollection( m.valueCollection() );
+			values = new TUnmodifiableCharCollection( m.valueCollection() );
 		return values;
 	}
 	public char[] values() { return m.values(); }

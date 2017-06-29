@@ -69,7 +69,7 @@ public class TUnmodifiableDoubleShortMap implements TDoubleShortMap, Serializabl
 
 	public TDoubleSet keySet() {
 		if ( keySet == null )
-			keySet = TCollections.unmodifiableSet( m.keySet() );
+			keySet = new TUnmodifiableDoubleSet( m.keySet() );
 		return keySet;
 	}
 	public double[] keys() { return m.keys(); }
@@ -77,7 +77,7 @@ public class TUnmodifiableDoubleShortMap implements TDoubleShortMap, Serializabl
 
 	public TShortCollection valueCollection() {
 		if ( values == null )
-			values = TCollections.unmodifiableCollection( m.valueCollection() );
+			values = new TUnmodifiableShortCollection( m.valueCollection() );
 		return values;
 	}
 	public short[] values() { return m.values(); }

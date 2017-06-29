@@ -69,7 +69,7 @@ public class TUnmodifiableLongIntMap implements TLongIntMap, Serializable {
 
 	public TLongSet keySet() {
 		if ( keySet == null )
-			keySet = TCollections.unmodifiableSet( m.keySet() );
+			keySet = new TUnmodifiableLongSet( m.keySet() );
 		return keySet;
 	}
 	public long[] keys() { return m.keys(); }
@@ -77,7 +77,7 @@ public class TUnmodifiableLongIntMap implements TLongIntMap, Serializable {
 
 	public TIntCollection valueCollection() {
 		if ( values == null )
-			values = TCollections.unmodifiableCollection( m.valueCollection() );
+			values = new TUnmodifiableIntCollection( m.valueCollection() );
 		return values;
 	}
 	public int[] values() { return m.values(); }

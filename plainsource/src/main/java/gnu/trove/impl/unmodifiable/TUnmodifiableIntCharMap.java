@@ -69,7 +69,7 @@ public class TUnmodifiableIntCharMap implements TIntCharMap, Serializable {
 
 	public TIntSet keySet() {
 		if ( keySet == null )
-			keySet = TCollections.unmodifiableSet( m.keySet() );
+			keySet = new TUnmodifiableIntSet( m.keySet() );
 		return keySet;
 	}
 	public int[] keys() { return m.keys(); }
@@ -77,7 +77,7 @@ public class TUnmodifiableIntCharMap implements TIntCharMap, Serializable {
 
 	public TCharCollection valueCollection() {
 		if ( values == null )
-			values = TCollections.unmodifiableCollection( m.valueCollection() );
+			values = new TUnmodifiableCharCollection( m.valueCollection() );
 		return values;
 	}
 	public char[] values() { return m.values(); }

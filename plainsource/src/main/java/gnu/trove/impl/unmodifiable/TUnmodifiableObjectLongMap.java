@@ -76,7 +76,7 @@ public class TUnmodifiableObjectLongMap<K> implements TObjectLongMap<K>, Seriali
 
 	public TLongCollection valueCollection() {
 		if ( values == null )
-			values = TCollections.unmodifiableCollection( m.valueCollection() );
+			values = new TUnmodifiableLongCollection( m.valueCollection() );
 		return values;
 	}
 	public long[] values() { return m.values(); }

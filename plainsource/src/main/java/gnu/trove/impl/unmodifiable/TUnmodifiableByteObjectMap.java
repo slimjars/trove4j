@@ -69,7 +69,7 @@ public class TUnmodifiableByteObjectMap<V> implements TByteObjectMap<V>, Seriali
 
 	public TByteSet keySet() {
 		if ( keySet == null )
-			keySet = TCollections.unmodifiableSet( m.keySet() );
+			keySet = new TUnmodifiableByteSet( m.keySet() );
 		return keySet;
 	}
 	public byte[] keys() { return m.keys(); }

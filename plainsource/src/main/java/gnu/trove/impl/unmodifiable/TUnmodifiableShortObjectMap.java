@@ -69,7 +69,7 @@ public class TUnmodifiableShortObjectMap<V> implements TShortObjectMap<V>, Seria
 
 	public TShortSet keySet() {
 		if ( keySet == null )
-			keySet = TCollections.unmodifiableSet( m.keySet() );
+			keySet = new TUnmodifiableShortSet( m.keySet() );
 		return keySet;
 	}
 	public short[] keys() { return m.keys(); }

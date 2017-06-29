@@ -69,7 +69,7 @@ public class TUnmodifiableIntObjectMap<V> implements TIntObjectMap<V>, Serializa
 
 	public TIntSet keySet() {
 		if ( keySet == null )
-			keySet = TCollections.unmodifiableSet( m.keySet() );
+			keySet = new TUnmodifiableIntSet( m.keySet() );
 		return keySet;
 	}
 	public int[] keys() { return m.keys(); }
