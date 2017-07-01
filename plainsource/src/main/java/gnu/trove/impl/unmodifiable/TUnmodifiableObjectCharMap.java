@@ -34,6 +34,7 @@ import gnu.trove.iterator.*;
 import gnu.trove.procedure.*;
 import gnu.trove.function.*;
 import gnu.trove.map.*;
+import gnu.trove.collections.*;
 import gnu.trove.*;
 
 import java.util.*;
@@ -76,7 +77,7 @@ public class TUnmodifiableObjectCharMap<K> implements TObjectCharMap<K>, Seriali
 
 	public TCharCollection valueCollection() {
 		if ( values == null )
-			values = new TUnmodifiableCharCollection( m.valueCollection() );
+			values = TUnmodifiableCharCollections.wrap( m.valueCollection() );
 		return values;
 	}
 	public char[] values() { return m.values(); }

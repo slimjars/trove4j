@@ -21,6 +21,7 @@ package gnu.trove.queue;
 
 import gnu.trove.TFloatCollection;
 
+
 /**
  * Interface for Trove queue implementations.
  *

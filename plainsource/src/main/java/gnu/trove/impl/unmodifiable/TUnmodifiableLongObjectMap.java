@@ -35,7 +35,7 @@ import gnu.trove.procedure.*;
 import gnu.trove.set.*;
 import gnu.trove.function.*;
 import gnu.trove.map.*;
-import gnu.trove.*;
+import gnu.trove.sets.*;
 
 import java.util.*;
 import java.io.Serializable;
@@ -69,7 +69,7 @@ public class TUnmodifiableLongObjectMap<V> implements TLongObjectMap<V>, Seriali
 
 	public TLongSet keySet() {
 		if ( keySet == null )
-			keySet = new TUnmodifiableLongSet( m.keySet() );
+			keySet = TUnmodifiableLongSets.wrap( m.keySet() );
 		return keySet;
 	}
 	public long[] keys() { return m.keys(); }

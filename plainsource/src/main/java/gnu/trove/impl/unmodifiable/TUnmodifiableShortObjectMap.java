@@ -35,7 +35,7 @@ import gnu.trove.procedure.*;
 import gnu.trove.set.*;
 import gnu.trove.function.*;
 import gnu.trove.map.*;
-import gnu.trove.*;
+import gnu.trove.sets.*;
 
 import java.util.*;
 import java.io.Serializable;
@@ -69,7 +69,7 @@ public class TUnmodifiableShortObjectMap<V> implements TShortObjectMap<V>, Seria
 
 	public TShortSet keySet() {
 		if ( keySet == null )
-			keySet = new TUnmodifiableShortSet( m.keySet() );
+			keySet = TUnmodifiableShortSets.wrap( m.keySet() );
 		return keySet;
 	}
 	public short[] keys() { return m.keys(); }

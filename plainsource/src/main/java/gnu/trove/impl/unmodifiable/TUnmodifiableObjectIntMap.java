@@ -34,6 +34,7 @@ import gnu.trove.iterator.*;
 import gnu.trove.procedure.*;
 import gnu.trove.function.*;
 import gnu.trove.map.*;
+import gnu.trove.collections.*;
 import gnu.trove.*;
 
 import java.util.*;
@@ -76,7 +77,7 @@ public class TUnmodifiableObjectIntMap<K> implements TObjectIntMap<K>, Serializa
 
 	public TIntCollection valueCollection() {
 		if ( values == null )
-			values = new TUnmodifiableIntCollection( m.valueCollection() );
+			values = TUnmodifiableIntCollections.wrap( m.valueCollection() );
 		return values;
 	}
 	public int[] values() { return m.values(); }

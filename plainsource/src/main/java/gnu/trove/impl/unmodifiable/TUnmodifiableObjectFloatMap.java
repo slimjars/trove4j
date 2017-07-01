@@ -34,6 +34,7 @@ import gnu.trove.iterator.*;
 import gnu.trove.procedure.*;
 import gnu.trove.function.*;
 import gnu.trove.map.*;
+import gnu.trove.collections.*;
 import gnu.trove.*;
 
 import java.util.*;
@@ -76,7 +77,7 @@ public class TUnmodifiableObjectFloatMap<K> implements TObjectFloatMap<K>, Seria
 
 	public TFloatCollection valueCollection() {
 		if ( values == null )
-			values = new TUnmodifiableFloatCollection( m.valueCollection() );
+			values = TUnmodifiableFloatCollections.wrap( m.valueCollection() );
 		return values;
 	}
 	public float[] values() { return m.values(); }

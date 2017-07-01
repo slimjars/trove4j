@@ -35,7 +35,7 @@ import gnu.trove.procedure.*;
 import gnu.trove.set.*;
 import gnu.trove.function.*;
 import gnu.trove.map.*;
-import gnu.trove.*;
+import gnu.trove.sets.*;
 
 import java.util.*;
 import java.io.Serializable;
@@ -69,7 +69,7 @@ public class TUnmodifiableCharObjectMap<V> implements TCharObjectMap<V>, Seriali
 
 	public TCharSet keySet() {
 		if ( keySet == null )
-			keySet = new TUnmodifiableCharSet( m.keySet() );
+			keySet = TUnmodifiableCharSets.wrap( m.keySet() );
 		return keySet;
 	}
 	public char[] keys() { return m.keys(); }

@@ -21,6 +21,7 @@ package gnu.trove.queue;
 
 import gnu.trove.TDoubleCollection;
 
+
 /**
  * Interface for Trove queue implementations.
  *

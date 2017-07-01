@@ -35,6 +35,8 @@ import gnu.trove.procedure.*;
 import gnu.trove.set.*;
 import gnu.trove.function.*;
 import gnu.trove.map.*;
+import gnu.trove.collections.*;
+import gnu.trove.sets.*;
 import gnu.trove.*;
 
 import java.util.Map;
@@ -69,7 +71,7 @@ public class TUnmodifiableDoubleFloatMap implements TDoubleFloatMap, Serializabl
 
 	public TDoubleSet keySet() {
 		if ( keySet == null )
-			keySet = new TUnmodifiableDoubleSet( m.keySet() );
+			keySet = TUnmodifiableDoubleSets.wrap( m.keySet() );
 		return keySet;
 	}
 	public double[] keys() { return m.keys(); }
@@ -77,7 +79,7 @@ public class TUnmodifiableDoubleFloatMap implements TDoubleFloatMap, Serializabl
 
 	public TFloatCollection valueCollection() {
 		if ( values == null )
-			values = new TUnmodifiableFloatCollection( m.valueCollection() );
+			values = TUnmodifiableFloatCollections.wrap( m.valueCollection() );
 		return values;
 	}
 	public float[] values() { return m.values(); }

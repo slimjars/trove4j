@@ -34,6 +34,7 @@ import gnu.trove.iterator.*;
 import gnu.trove.procedure.*;
 import gnu.trove.function.*;
 import gnu.trove.map.*;
+import gnu.trove.collections.*;
 import gnu.trove.*;
 
 import java.util.*;
@@ -76,7 +77,7 @@ public class TUnmodifiableObjectLongMap<K> implements TObjectLongMap<K>, Seriali
 
 	public TLongCollection valueCollection() {
 		if ( values == null )
-			values = new TUnmodifiableLongCollection( m.valueCollection() );
+			values = TUnmodifiableLongCollections.wrap( m.valueCollection() );
 		return values;
 	}
 	public long[] values() { return m.values(); }

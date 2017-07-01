@@ -35,6 +35,8 @@ import gnu.trove.procedure.*;
 import gnu.trove.set.*;
 import gnu.trove.function.*;
 import gnu.trove.map.*;
+import gnu.trove.collections.*;
+import gnu.trove.sets.*;
 import gnu.trove.*;
 
 import java.util.Map;
@@ -69,7 +71,7 @@ public class TUnmodifiableShortLongMap implements TShortLongMap, Serializable {
 
 	public TShortSet keySet() {
 		if ( keySet == null )
-			keySet = new TUnmodifiableShortSet( m.keySet() );
+			keySet = TUnmodifiableShortSets.wrap( m.keySet() );
 		return keySet;
 	}
 	public short[] keys() { return m.keys(); }
@@ -77,7 +79,7 @@ public class TUnmodifiableShortLongMap implements TShortLongMap, Serializable {
 
 	public TLongCollection valueCollection() {
 		if ( values == null )
-			values = new TUnmodifiableLongCollection( m.valueCollection() );
+			values = TUnmodifiableLongCollections.wrap( m.valueCollection() );
 		return values;
 	}
 	public long[] values() { return m.values(); }

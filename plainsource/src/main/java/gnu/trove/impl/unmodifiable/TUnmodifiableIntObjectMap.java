@@ -35,7 +35,7 @@ import gnu.trove.procedure.*;
 import gnu.trove.set.*;
 import gnu.trove.function.*;
 import gnu.trove.map.*;
-import gnu.trove.*;
+import gnu.trove.sets.*;
 
 import java.util.*;
 import java.io.Serializable;
@@ -69,7 +69,7 @@ public class TUnmodifiableIntObjectMap<V> implements TIntObjectMap<V>, Serializa
 
 	public TIntSet keySet() {
 		if ( keySet == null )
-			keySet = new TUnmodifiableIntSet( m.keySet() );
+			keySet = TUnmodifiableIntSets.wrap( m.keySet() );
 		return keySet;
 	}
 	public int[] keys() { return m.keys(); }

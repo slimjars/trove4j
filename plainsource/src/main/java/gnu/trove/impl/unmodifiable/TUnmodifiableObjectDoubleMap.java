@@ -34,6 +34,7 @@ import gnu.trove.iterator.*;
 import gnu.trove.procedure.*;
 import gnu.trove.function.*;
 import gnu.trove.map.*;
+import gnu.trove.collections.*;
 import gnu.trove.*;
 
 import java.util.*;
@@ -76,7 +77,7 @@ public class TUnmodifiableObjectDoubleMap<K> implements TObjectDoubleMap<K>, Ser
 
 	public TDoubleCollection valueCollection() {
 		if ( values == null )
-			values = new TUnmodifiableDoubleCollection( m.valueCollection() );
+			values = TUnmodifiableDoubleCollections.wrap( m.valueCollection() );
 		return values;
 	}
 	public double[] values() { return m.values(); }

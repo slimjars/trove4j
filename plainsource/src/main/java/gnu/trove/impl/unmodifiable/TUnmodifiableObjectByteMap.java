@@ -34,6 +34,7 @@ import gnu.trove.iterator.*;
 import gnu.trove.procedure.*;
 import gnu.trove.function.*;
 import gnu.trove.map.*;
+import gnu.trove.collections.*;
 import gnu.trove.*;
 
 import java.util.*;
@@ -76,7 +77,7 @@ public class TUnmodifiableObjectByteMap<K> implements TObjectByteMap<K>, Seriali
 
 	public TByteCollection valueCollection() {
 		if ( values == null )
-			values = new TUnmodifiableByteCollection( m.valueCollection() );
+			values = TUnmodifiableByteCollections.wrap( m.valueCollection() );
 		return values;
 	}
 	public byte[] values() { return m.values(); }

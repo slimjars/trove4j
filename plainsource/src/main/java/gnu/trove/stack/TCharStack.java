@@ -26,8 +26,6 @@ package gnu.trove.stack;
 //////////////////////////////////////////////////
 
 
-
-
 /**
  * A stack of char primitives.
  */

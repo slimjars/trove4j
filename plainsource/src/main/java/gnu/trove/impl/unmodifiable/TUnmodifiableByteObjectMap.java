@@ -35,7 +35,7 @@ import gnu.trove.procedure.*;
 import gnu.trove.set.*;
 import gnu.trove.function.*;
 import gnu.trove.map.*;
-import gnu.trove.*;
+import gnu.trove.sets.*;
 
 import java.util.*;
 import java.io.Serializable;
@@ -69,7 +69,7 @@ public class TUnmodifiableByteObjectMap<V> implements TByteObjectMap<V>, Seriali
 
 	public TByteSet keySet() {
 		if ( keySet == null )
-			keySet = new TUnmodifiableByteSet( m.keySet() );
+			keySet = TUnmodifiableByteSets.wrap( m.keySet() );
 		return keySet;
 	}
 	public byte[] keys() { return m.keys(); }
