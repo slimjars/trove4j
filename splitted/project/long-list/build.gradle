@@ -1,0 +1,16 @@
+dependencies {
+    compile project(':trove4j-long-collection')
+    compile project(':trove4j-long-function')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: long-list'
+                }
+            }
+        }
+    }
+}

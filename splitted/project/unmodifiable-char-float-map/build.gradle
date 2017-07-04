@@ -1,0 +1,17 @@
+dependencies {
+    compile project(':trove4j-char-float-map')
+    compile project(':trove4j-unmodifiable-char-sets')
+    compile project(':trove4j-unmodifiable-float-collections')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: unmodifiable-char-float-map'
+                }
+            }
+        }
+    }
+}

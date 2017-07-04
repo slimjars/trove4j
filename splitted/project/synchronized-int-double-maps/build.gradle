@@ -1,0 +1,15 @@
+dependencies {
+    compile project(':trove4j-synchronized-int-double-map')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: synchronized-int-double-maps'
+                }
+            }
+        }
+    }
+}

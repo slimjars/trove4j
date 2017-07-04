@@ -1,0 +1,15 @@
+dependencies {
+    compile project(':trove4j-synchronized-short-byte-map')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: synchronized-short-byte-maps'
+                }
+            }
+        }
+    }
+}

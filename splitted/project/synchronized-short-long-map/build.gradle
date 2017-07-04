@@ -1,0 +1,17 @@
+dependencies {
+    compile project(':trove4j-short-long-map')
+    compile project(':trove4j-synchronized-long-collection')
+    compile project(':trove4j-synchronized-short-set')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: synchronized-short-long-map'
+                }
+            }
+        }
+    }
+}

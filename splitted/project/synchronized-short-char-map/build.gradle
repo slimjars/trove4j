@@ -1,0 +1,17 @@
+dependencies {
+    compile project(':trove4j-short-char-map')
+    compile project(':trove4j-synchronized-char-collection')
+    compile project(':trove4j-synchronized-short-set')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: synchronized-short-char-map'
+                }
+            }
+        }
+    }
+}

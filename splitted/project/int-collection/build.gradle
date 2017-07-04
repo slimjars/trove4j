@@ -1,0 +1,16 @@
+dependencies {
+    compile project(':trove4j-int-iterator')
+    compile project(':trove4j-int-procedure')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: int-collection'
+                }
+            }
+        }
+    }
+}

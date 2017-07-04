@@ -1,0 +1,15 @@
+dependencies {
+    compile project(':trove4j-double-long-map')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: double-long-map-decorator'
+                }
+            }
+        }
+    }
+}

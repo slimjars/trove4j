@@ -1,0 +1,17 @@
+dependencies {
+    compile project(':trove4j-char-long-map')
+    compile project(':trove4j-unmodifiable-char-sets')
+    compile project(':trove4j-unmodifiable-long-collections')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: unmodifiable-char-long-map'
+                }
+            }
+        }
+    }
+}

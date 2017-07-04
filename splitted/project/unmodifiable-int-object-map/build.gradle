@@ -1,0 +1,16 @@
+dependencies {
+    compile project(':trove4j-int-object-map')
+    compile project(':trove4j-unmodifiable-int-sets')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: unmodifiable-int-object-map'
+                }
+            }
+        }
+    }
+}

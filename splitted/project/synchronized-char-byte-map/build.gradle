@@ -1,0 +1,17 @@
+dependencies {
+    compile project(':trove4j-char-byte-map')
+    compile project(':trove4j-synchronized-byte-collection')
+    compile project(':trove4j-synchronized-char-set')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: synchronized-char-byte-map'
+                }
+            }
+        }
+    }
+}

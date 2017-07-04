@@ -1,0 +1,19 @@
+dependencies {
+    compile project(':trove4j-object-function')
+    compile project(':trove4j-object-procedure')
+    compile project(':trove4j-short-object-iterator')
+    compile project(':trove4j-short-object-procedure')
+    compile project(':trove4j-short-set')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: short-object-map'
+                }
+            }
+        }
+    }
+}

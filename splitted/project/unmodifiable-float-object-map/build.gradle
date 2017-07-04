@@ -1,0 +1,16 @@
+dependencies {
+    compile project(':trove4j-float-object-map')
+    compile project(':trove4j-unmodifiable-float-sets')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: unmodifiable-float-object-map'
+                }
+            }
+        }
+    }
+}

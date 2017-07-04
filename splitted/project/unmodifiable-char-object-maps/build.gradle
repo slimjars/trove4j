@@ -1,0 +1,15 @@
+dependencies {
+    compile project(':trove4j-unmodifiable-char-object-map')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: unmodifiable-char-object-maps'
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,15 @@
+dependencies {
+    compile project(':trove4j-unmodifiable-double-long-map')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: unmodifiable-double-long-maps'
+                }
+            }
+        }
+    }
+}

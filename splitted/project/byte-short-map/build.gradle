@@ -1,0 +1,19 @@
+dependencies {
+    compile project(':trove4j-byte-set')
+    compile project(':trove4j-byte-short-iterator')
+    compile project(':trove4j-byte-short-procedure')
+    compile project(':trove4j-short-collection')
+    compile project(':trove4j-short-function')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: byte-short-map'
+                }
+            }
+        }
+    }
+}

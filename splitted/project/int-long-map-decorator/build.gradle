@@ -1,0 +1,15 @@
+dependencies {
+    compile project(':trove4j-int-long-map')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: int-long-map-decorator'
+                }
+            }
+        }
+    }
+}

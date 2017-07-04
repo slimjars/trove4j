@@ -1,0 +1,19 @@
+dependencies {
+    compile project(':trove4j-byte-object-iterator')
+    compile project(':trove4j-byte-object-procedure')
+    compile project(':trove4j-byte-set')
+    compile project(':trove4j-object-function')
+    compile project(':trove4j-object-procedure')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: byte-object-map'
+                }
+            }
+        }
+    }
+}

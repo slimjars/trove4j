@@ -1,0 +1,63 @@
+task wrapper(type: Wrapper) {
+    gradleVersion = 2.3
+}
+
+allprojects {
+    group = pGroup
+    version = pVersion
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'eclipse'
+    apply plugin: 'maven'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+    }
+
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                repository(url: "file://localhost/slimjars/maven-repo")
+            }
+        }
+    }
+
+    task sourcesJar(type: Jar, dependsOn: classes) {
+        classifier = 'sources'
+        from sourceSets.main.allSource
+    }
+
+    artifacts {
+        archives sourcesJar
+    }
+
+    afterEvaluate { project ->
+        uploadArchives {
+            repositories {
+                mavenDeployer {
+                    pom.project {
+                        name 'Trove4j Slim'
+                        description 'High performance (primitive) collections'
+                        url 'https://www.slimjars.com/projects/trove4j'
+                        licenses {
+                            license {
+                                name 'GNU Lesser General Public License 3.0'
+                                url 'https://www.gnu.org/licenses/lgpl-3.0.txt'
+                                distribution 'repo'
+                            }
+                        }
+                        organization {
+                            name 'Slimjars'
+                            url 'https://www.slimjars.com'
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

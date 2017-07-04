@@ -1,0 +1,17 @@
+dependencies {
+    compile project(':trove4j-double-char-map')
+    compile project(':trove4j-unmodifiable-char-collections')
+    compile project(':trove4j-unmodifiable-double-sets')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: unmodifiable-double-char-map'
+                }
+            }
+        }
+    }
+}

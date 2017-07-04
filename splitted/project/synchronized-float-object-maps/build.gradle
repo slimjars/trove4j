@@ -1,0 +1,15 @@
+dependencies {
+    compile project(':trove4j-synchronized-float-object-map')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: synchronized-float-object-maps'
+                }
+            }
+        }
+    }
+}

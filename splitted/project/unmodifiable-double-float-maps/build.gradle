@@ -1,0 +1,15 @@
+dependencies {
+    compile project(':trove4j-unmodifiable-double-float-map')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: unmodifiable-double-float-maps'
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,16 @@
+dependencies {
+    compile project(':trove4j-char-array-list')
+    compile project(':trove4j-char-stack')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: char-array-stack'
+                }
+            }
+        }
+    }
+}

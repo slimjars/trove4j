@@ -1,0 +1,16 @@
+dependencies {
+    compile project(':trove4j-int-array-list')
+    compile project(':trove4j-int-stack')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: int-array-stack'
+                }
+            }
+        }
+    }
+}

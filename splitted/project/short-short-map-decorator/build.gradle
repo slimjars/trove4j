@@ -1,0 +1,15 @@
+dependencies {
+    compile project(':trove4j-short-short-map')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: short-short-map-decorator'
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,17 @@
+dependencies {
+    compile project(':trove4j-object-function')
+    compile project(':trove4j-object-object-procedure')
+    compile project(':trove4j-object-procedure')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: map'
+                }
+            }
+        }
+    }
+}

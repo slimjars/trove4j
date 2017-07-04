@@ -1,0 +1,15 @@
+dependencies {
+    compile project(':trove4j-object-int-map-decorator')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: object-int-map-decorators'
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,19 @@
+dependencies {
+    compile project(':trove4j-char-collection')
+    compile project(':trove4j-char-function')
+    compile project(':trove4j-short-char-iterator')
+    compile project(':trove4j-short-char-procedure')
+    compile project(':trove4j-short-set')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: short-char-map'
+                }
+            }
+        }
+    }
+}

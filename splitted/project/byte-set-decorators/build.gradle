@@ -1,0 +1,15 @@
+dependencies {
+    compile project(':trove4j-byte-set-decorator')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: byte-set-decorators'
+                }
+            }
+        }
+    }
+}

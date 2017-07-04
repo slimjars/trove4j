@@ -1,0 +1,16 @@
+dependencies {
+    compile project(':trove4j-float-procedure')
+    compile project(':trove4j-primitive-hash')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: float-short-hash'
+                }
+            }
+        }
+    }
+}

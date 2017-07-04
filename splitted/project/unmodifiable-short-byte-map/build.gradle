@@ -1,0 +1,17 @@
+dependencies {
+    compile project(':trove4j-short-byte-map')
+    compile project(':trove4j-unmodifiable-byte-collections')
+    compile project(':trove4j-unmodifiable-short-sets')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: unmodifiable-short-byte-map'
+                }
+            }
+        }
+    }
+}

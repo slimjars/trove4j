@@ -1,0 +1,17 @@
+dependencies {
+    compile project(':trove4j-hash-primitive-iterator')
+    compile project(':trove4j-short-int-hash')
+    compile project(':trove4j-short-int-map')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: short-int-hash-map'
+                }
+            }
+        }
+    }
+}

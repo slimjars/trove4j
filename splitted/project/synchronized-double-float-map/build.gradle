@@ -1,0 +1,17 @@
+dependencies {
+    compile project(':trove4j-double-float-map')
+    compile project(':trove4j-synchronized-double-set')
+    compile project(':trove4j-synchronized-float-collection')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: synchronized-double-float-map'
+                }
+            }
+        }
+    }
+}

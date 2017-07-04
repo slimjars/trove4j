@@ -1,0 +1,15 @@
+dependencies {
+    compile project(':trove4j-char-short-map-decorator')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: char-short-map-decorators'
+                }
+            }
+        }
+    }
+}

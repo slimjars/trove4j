@@ -1,0 +1,15 @@
+dependencies {
+    compile project(':trove4j-float-collection')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: float-set'
+                }
+            }
+        }
+    }
+}

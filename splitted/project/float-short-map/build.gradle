@@ -1,0 +1,19 @@
+dependencies {
+    compile project(':trove4j-float-set')
+    compile project(':trove4j-float-short-iterator')
+    compile project(':trove4j-float-short-procedure')
+    compile project(':trove4j-short-collection')
+    compile project(':trove4j-short-function')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: float-short-map'
+                }
+            }
+        }
+    }
+}

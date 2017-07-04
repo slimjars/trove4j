@@ -1,0 +1,16 @@
+dependencies {
+    compile project(':trove4j-char-iterator')
+    compile project(':trove4j-char-procedure')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: char-collection'
+                }
+            }
+        }
+    }
+}

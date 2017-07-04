@@ -1,0 +1,15 @@
+dependencies {
+    compile project(':trove4j-synchronized-char-double-map')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: synchronized-char-double-maps'
+                }
+            }
+        }
+    }
+}

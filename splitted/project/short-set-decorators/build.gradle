@@ -1,0 +1,15 @@
+dependencies {
+    compile project(':trove4j-short-set-decorator')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: short-set-decorators'
+                }
+            }
+        }
+    }
+}

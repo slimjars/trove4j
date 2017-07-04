@@ -1,0 +1,15 @@
+dependencies {
+    compile project(':trove4j-double-list-decorator')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: double-list-decorators'
+                }
+            }
+        }
+    }
+}

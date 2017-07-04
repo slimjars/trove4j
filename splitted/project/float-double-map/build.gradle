@@ -1,0 +1,19 @@
+dependencies {
+    compile project(':trove4j-double-collection')
+    compile project(':trove4j-double-function')
+    compile project(':trove4j-float-double-iterator')
+    compile project(':trove4j-float-double-procedure')
+    compile project(':trove4j-float-set')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: float-double-map'
+                }
+            }
+        }
+    }
+}

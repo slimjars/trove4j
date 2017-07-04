@@ -1,0 +1,17 @@
+dependencies {
+    compile project(':trove4j-hash-set')
+    compile project(':trove4j-int-array-list')
+    compile project(':trove4j-int-linked-list')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: linked-hash-set'
+                }
+            }
+        }
+    }
+}

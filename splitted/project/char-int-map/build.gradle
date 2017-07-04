@@ -1,0 +1,19 @@
+dependencies {
+    compile project(':trove4j-char-int-iterator')
+    compile project(':trove4j-char-int-procedure')
+    compile project(':trove4j-char-set')
+    compile project(':trove4j-int-collection')
+    compile project(':trove4j-int-function')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: char-int-map'
+                }
+            }
+        }
+    }
+}

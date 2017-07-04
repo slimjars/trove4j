@@ -1,0 +1,17 @@
+dependencies {
+    compile project(':trove4j-constants')
+    compile project(':trove4j-hash-functions')
+    compile project(':trove4j-int-list')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: int-array-list'
+                }
+            }
+        }
+    }
+}

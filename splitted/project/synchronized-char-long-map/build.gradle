@@ -1,0 +1,17 @@
+dependencies {
+    compile project(':trove4j-char-long-map')
+    compile project(':trove4j-synchronized-char-set')
+    compile project(':trove4j-synchronized-long-collection')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: synchronized-char-long-map'
+                }
+            }
+        }
+    }
+}

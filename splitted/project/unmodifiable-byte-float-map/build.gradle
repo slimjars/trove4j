@@ -1,0 +1,17 @@
+dependencies {
+    compile project(':trove4j-byte-float-map')
+    compile project(':trove4j-unmodifiable-byte-sets')
+    compile project(':trove4j-unmodifiable-float-collections')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: unmodifiable-byte-float-map'
+                }
+            }
+        }
+    }
+}

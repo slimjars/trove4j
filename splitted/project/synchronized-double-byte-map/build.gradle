@@ -1,0 +1,17 @@
+dependencies {
+    compile project(':trove4j-double-byte-map')
+    compile project(':trove4j-synchronized-byte-collection')
+    compile project(':trove4j-synchronized-double-set')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: synchronized-double-byte-map'
+                }
+            }
+        }
+    }
+}

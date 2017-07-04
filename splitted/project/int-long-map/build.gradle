@@ -1,0 +1,19 @@
+dependencies {
+    compile project(':trove4j-int-long-iterator')
+    compile project(':trove4j-int-long-procedure')
+    compile project(':trove4j-int-set')
+    compile project(':trove4j-long-collection')
+    compile project(':trove4j-long-function')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: int-long-map'
+                }
+            }
+        }
+    }
+}

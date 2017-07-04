@@ -1,0 +1,17 @@
+dependencies {
+    compile project(':trove4j-int-long-map')
+    compile project(':trove4j-unmodifiable-int-sets')
+    compile project(':trove4j-unmodifiable-long-collections')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: unmodifiable-int-long-map'
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,17 @@
+dependencies {
+    compile project(':trove4j-float-double-hash')
+    compile project(':trove4j-float-double-map')
+    compile project(':trove4j-hash-primitive-iterator')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: float-double-hash-map'
+                }
+            }
+        }
+    }
+}

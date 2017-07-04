@@ -1,0 +1,19 @@
+dependencies {
+    compile project(':trove4j-float-collection')
+    compile project(':trove4j-float-function')
+    compile project(':trove4j-int-float-iterator')
+    compile project(':trove4j-int-float-procedure')
+    compile project(':trove4j-int-set')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: int-float-map'
+                }
+            }
+        }
+    }
+}

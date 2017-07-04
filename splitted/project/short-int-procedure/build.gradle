@@ -1,0 +1,14 @@
+dependencies {
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: short-int-procedure'
+                }
+            }
+        }
+    }
+}

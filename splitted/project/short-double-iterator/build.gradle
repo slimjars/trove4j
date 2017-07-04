@@ -1,0 +1,15 @@
+dependencies {
+    compile project(':trove4j-advancing-iterator')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: short-double-iterator'
+                }
+            }
+        }
+    }
+}

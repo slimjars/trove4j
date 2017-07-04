@@ -1,0 +1,16 @@
+dependencies {
+    compile project(':trove4j-double-iterator')
+    compile project(':trove4j-double-procedure')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: double-collection'
+                }
+            }
+        }
+    }
+}

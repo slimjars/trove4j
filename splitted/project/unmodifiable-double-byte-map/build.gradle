@@ -1,0 +1,17 @@
+dependencies {
+    compile project(':trove4j-double-byte-map')
+    compile project(':trove4j-unmodifiable-byte-collections')
+    compile project(':trove4j-unmodifiable-double-sets')
+}
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.project {
+                    name 'Trove4j Slim: unmodifiable-double-byte-map'
+                }
+            }
+        }
+    }
+}
