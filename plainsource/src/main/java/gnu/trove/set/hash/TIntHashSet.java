@@ -132,7 +132,7 @@ public class TIntHashSet extends TIntHash implements TIntSet, Externalizable {
             if ( this.no_entry_value != ( int ) 0 ) {
                 Arrays.fill( _set, this.no_entry_value );
             }
-            setUp( (int) Math.ceil( DEFAULT_CAPACITY / _loadFactor ) );
+            setUp( saturatedCast( fastCeil( DEFAULT_CAPACITY / (double) _loadFactor ) ) );
         }
         addAll( collection );
     }
@@ -158,21 +158,16 @@ public class TIntHashSet extends TIntHash implements TIntSet, Externalizable {
 
     /** {@inheritDoc} */
     public int[] toArray() {
-        int[] result = new int[ size() ];
-        int[] set = _set;
-        byte[] states = _states;
-
-        for ( int i = states.length, j = 0; i-- > 0; ) {
-            if ( states[i] == FULL ) {
-                result[j++] = set[i];
-            }
-        }
-        return result;
+        return toArray( new int[ _size ] );
     }
 
 
     /** {@inheritDoc} */
     public int[] toArray( int[] dest ) {
+        if ( dest.length < _size ) {
+            dest = new int[ _size ];
+        }
+
         int[] set = _set;
         byte[] states = _states;
 

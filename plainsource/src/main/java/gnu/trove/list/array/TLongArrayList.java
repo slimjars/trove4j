@@ -45,14 +45,15 @@ import java.util.*;
 public class TLongArrayList implements TLongList, Externalizable {
 	static final long serialVersionUID = 1L;
 
+    /** the default capacity for new lists */
+    protected static final int DEFAULT_CAPACITY = Constants.DEFAULT_CAPACITY;
+
+
     /** the data of the list */
     protected long[] _data;
 
     /** the index after the last entry in the list */
     protected int _pos;
-
-    /** the default capacity for new lists */
-    protected static final int DEFAULT_CAPACITY = Constants.DEFAULT_CAPACITY;
 
     /** the long value that represents null */
     protected long no_entry_value;
@@ -138,7 +139,6 @@ public class TLongArrayList implements TLongList, Externalizable {
      * an IllegalStateException will be thrown
      *
      * @param values
-     * @return
      */
     public static TLongArrayList wrap(long[] values) {
         return wrap(values, ( long ) 0);
@@ -152,7 +152,6 @@ public class TLongArrayList implements TLongList, Externalizable {
      *
      * @param values
      * @param no_entry_value
-     * @return
      */
     public static TLongArrayList wrap(long[] values, long no_entry_value) {
         return new TLongArrayList(values, no_entry_value, true) {
@@ -340,40 +339,19 @@ public class TLongArrayList implements TLongList, Externalizable {
 
     /** {@inheritDoc} */
     public void clear() {
-        clear( DEFAULT_CAPACITY );
-    }
-
-
-    /**
-     * Flushes the internal state of the list, setting the capacity of the empty list to
-     * <tt>capacity</tt>.
-     */
-    public void clear( int capacity ) {
-        _data = new long[ capacity ];
-        _pos = 0;
-    }
-
-
-    /**
-     * Sets the size of the list to 0, but does not change its capacity. This method can
-     * be used as an alternative to the {@link #clear()} method if you want to recycle a
-     * list without allocating new backing arrays.
-     */
-    public void reset() {
-        _pos = 0;
+        clearQuick();
         Arrays.fill( _data, no_entry_value );
     }
 
 
     /**
      * Sets the size of the list to 0, but does not change its capacity. This method can
-     * be used as an alternative to the {@link #clear()} method if you want to recycle a
-     * list without allocating new backing arrays. This method differs from
-     * {@link #reset()} in that it does not clear the old values in the backing array.
+     * be used as an alternative to the {@link #clear()} method if you want reset the list
+     * state without incurring the cost of filling bank data in the list.
      * Thus, it is possible for getQuick to return stale data if this method is used and
      * the caller is careless about bounds checking.
      */
-    public void resetQuick() {
+    public void clearQuick() {
         _pos = 0;
     }
 
@@ -609,7 +587,7 @@ public class TLongArrayList implements TLongList, Externalizable {
 
     /** {@inheritDoc} */
     public void transformValues( TLongFunction function ) {
-        for ( int i = _pos; i-- > 0; ) {
+        for ( int i = 0; i < _pos; i++ ) {
             _data[ i ] = function.execute( _data[ i ] );
         }
     }
@@ -738,19 +716,30 @@ public class TLongArrayList implements TLongList, Externalizable {
         if ( other == this ) {
             return true;
         }
-        else if ( other instanceof TLongArrayList ) {
+        if ( !( other instanceof TLongList ) ) return false;
+
+        if ( other instanceof TLongArrayList ) {
             TLongArrayList that = ( TLongArrayList )other;
             if ( that.size() != this.size() ) return false;
-            else {
-                for ( int i = _pos; i-- > 0; ) {
-                    if ( this._data[ i ] != that._data[ i ] ) {
-                        return false;
-                    }
+
+            for ( int i = _pos; i-- > 0; ) {
+                if ( this._data[ i ] != that._data[ i ] ) {
+                    return false;
                 }
-                return true;
             }
+            return true;
         }
-        else return false;
+        else {
+            TLongList that = ( TLongList )other;
+            if ( that.size() != this.size() ) return false;
+
+            for( int i = 0; i < _pos; i++ ) {
+                if ( this._data[ i ] != that.get( i ) ) {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 
 

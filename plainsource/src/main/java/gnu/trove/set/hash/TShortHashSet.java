@@ -132,7 +132,7 @@ public class TShortHashSet extends TShortHash implements TShortSet, Externalizab
             if ( this.no_entry_value != ( short ) 0 ) {
                 Arrays.fill( _set, this.no_entry_value );
             }
-            setUp( (int) Math.ceil( DEFAULT_CAPACITY / _loadFactor ) );
+            setUp( saturatedCast( fastCeil( DEFAULT_CAPACITY / (double) _loadFactor ) ) );
         }
         addAll( collection );
     }
@@ -158,21 +158,16 @@ public class TShortHashSet extends TShortHash implements TShortSet, Externalizab
 
     /** {@inheritDoc} */
     public short[] toArray() {
-        short[] result = new short[ size() ];
-        short[] set = _set;
-        byte[] states = _states;
-
-        for ( int i = states.length, j = 0; i-- > 0; ) {
-            if ( states[i] == FULL ) {
-                result[j++] = set[i];
-            }
-        }
-        return result;
+        return toArray( new short[ _size ] );
     }
 
 
     /** {@inheritDoc} */
     public short[] toArray( short[] dest ) {
+        if ( dest.length < _size ) {
+            dest = new short[ _size ];
+        }
+
         short[] set = _set;
         byte[] states = _states;
 

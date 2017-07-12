@@ -45,7 +45,7 @@ public interface TFloatObjectMap<V> {
 
     /**
      * Returns the value that represents null in the {@link #keySet()}.
-     * The default value is generally zero, but can be changed during
+     * The default value is generally zero, but can be configured during
      * construction of the collection.
      *
      * @return the value that represents a null value in this collection.
@@ -314,7 +314,7 @@ public interface TFloatObjectMap<V> {
     /**
      * Returns the values of the map as an Object array. Note that the array returned
      * is typed as an Object[] and may not be cast to a more specific type. See
-     * {@link #values(V[])} for a version which allows specifically typed arrays.
+     * {@link #values(Object[])} for a version which allows specifically typed arrays.
      * Changes to the array of values will not be reflected in the map
      * nor vice-versa.
      *

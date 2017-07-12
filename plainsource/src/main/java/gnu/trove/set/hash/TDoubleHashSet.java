@@ -132,7 +132,7 @@ public class TDoubleHashSet extends TDoubleHash implements TDoubleSet, Externali
             if ( this.no_entry_value != ( double ) 0 ) {
                 Arrays.fill( _set, this.no_entry_value );
             }
-            setUp( (int) Math.ceil( DEFAULT_CAPACITY / _loadFactor ) );
+            setUp( saturatedCast( fastCeil( DEFAULT_CAPACITY / (double) _loadFactor ) ) );
         }
         addAll( collection );
     }
@@ -158,21 +158,16 @@ public class TDoubleHashSet extends TDoubleHash implements TDoubleSet, Externali
 
     /** {@inheritDoc} */
     public double[] toArray() {
-        double[] result = new double[ size() ];
-        double[] set = _set;
-        byte[] states = _states;
-
-        for ( int i = states.length, j = 0; i-- > 0; ) {
-            if ( states[i] == FULL ) {
-                result[j++] = set[i];
-            }
-        }
-        return result;
+        return toArray( new double[ _size ] );
     }
 
 
     /** {@inheritDoc} */
     public double[] toArray( double[] dest ) {
+        if ( dest.length < _size ) {
+            dest = new double[ _size ];
+        }
+
         double[] set = _set;
         byte[] states = _states;
 

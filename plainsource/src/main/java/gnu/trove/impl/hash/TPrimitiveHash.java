@@ -20,8 +20,6 @@
 
 package gnu.trove.impl.hash;
 
-import gnu.trove.impl.HashFunctions;
-
 
 
 /**
@@ -77,7 +75,7 @@ abstract public class TPrimitiveHash extends THash {
      * @param initialCapacity an <code>int</code> value
      */
     public TPrimitiveHash( int initialCapacity ) {
-        this( initialCapacity, DEFAULT_LOAD_FACTOR );
+        super( initialCapacity, DEFAULT_LOAD_FACTOR );
     }
 
 
@@ -91,10 +89,7 @@ abstract public class TPrimitiveHash extends THash {
      * @param loadFactor      a <code>float</code> value
      */
     public TPrimitiveHash( int initialCapacity, float loadFactor ) {
-        super();
-		initialCapacity = Math.max( 1, initialCapacity );
-        _loadFactor = loadFactor;
-        setUp( HashFunctions.fastCeil( initialCapacity / loadFactor ) );
+        super( initialCapacity, loadFactor );
     }
 
 
