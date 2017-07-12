@@ -733,22 +733,22 @@ public class TCharLinkedList implements TCharList, Externalizable {
         }
 
         TCharLink middle;
-        int mid;
         int from = fromIndex;
         TCharLink fromLink = getLinkAt(fromIndex);
-        int to = toIndex;
+        int to = toIndex - 1;
 
-        while (from < to) {
-            mid = (from + to) >>> 1;
+        while (from <= to) {
+            int mid = (from + to) >>> 1;
             middle = getLink(fromLink, from, mid);
-            if (middle.getValue() == value)
-                return mid;
+            char midVal = middle.getValue();
 
-            if (middle.getValue() < value) {
+            if (midVal < value) {
                 from = mid + 1;
                 fromLink = middle.next;
-            } else {
+            }else if (midVal > value) {
                 to = mid - 1;
+            } else {
+                return mid;
             }
         }
 
