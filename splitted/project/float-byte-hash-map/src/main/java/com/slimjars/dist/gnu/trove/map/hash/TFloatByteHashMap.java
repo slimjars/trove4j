@@ -131,7 +131,7 @@ public class TFloatByteHashMap extends TFloatByteHash implements TFloatByteMap, 
         super( map.size() );
         if ( map instanceof TFloatByteHashMap ) {
             TFloatByteHashMap hashmap = ( TFloatByteHashMap ) map;
-            this._loadFactor = hashmap._loadFactor;
+            this._loadFactor = Math.abs( hashmap._loadFactor );
             this.no_entry_key = hashmap.no_entry_key;
             this.no_entry_value = hashmap.no_entry_value;
             //noinspection RedundantCast
@@ -142,7 +142,7 @@ public class TFloatByteHashMap extends TFloatByteHash implements TFloatByteMap, 
             if ( this.no_entry_value != ( byte ) 0 ) {
                 Arrays.fill( _values, this.no_entry_value );
             }
-            setUp( (int) Math.ceil( DEFAULT_CAPACITY / _loadFactor ) );
+            setUp( saturatedCast( fastCeil( DEFAULT_CAPACITY / (double) _loadFactor ) ) );
         }
         putAll( map );
     }
@@ -296,6 +296,9 @@ public class TFloatByteHashMap extends TFloatByteHash implements TFloatByteMap, 
     /** {@inheritDoc} */
     public float[] keys() {
         float[] keys = new float[size()];
+        if ( keys.length == 0 ) {
+            return keys;        // nothing to copy
+        }
         float[] k = _set;
         byte[] states = _states;
 
@@ -311,6 +314,9 @@ public class TFloatByteHashMap extends TFloatByteHash implements TFloatByteMap, 
     /** {@inheritDoc} */
     public float[] keys( float[] array ) {
         int size = size();
+        if ( size == 0 ) {
+            return array;       // nothing to copy
+        }
         if ( array.length < size ) {
             array = new float[size];
         }
@@ -336,6 +342,9 @@ public class TFloatByteHashMap extends TFloatByteHash implements TFloatByteMap, 
     /** {@inheritDoc} */
     public byte[] values() {
         byte[] vals = new byte[size()];
+        if ( vals.length == 0 ) {
+            return vals;        // nothing to copy
+        }
         byte[] v = _values;
         byte[] states = _states;
 
@@ -351,6 +360,9 @@ public class TFloatByteHashMap extends TFloatByteHash implements TFloatByteMap, 
     /** {@inheritDoc} */
     public byte[] values( byte[] array ) {
         int size = size();
+        if ( size == 0 ) {
+            return array;       // nothing to copy
+        }
         if ( array.length < size ) {
             array = new byte[size];
         }
@@ -852,17 +864,16 @@ public class TFloatByteHashMap extends TFloatByteHash implements TFloatByteMap, 
         /** {@inheritDoc} */
         public boolean remove( byte entry ) {
             byte[] values = _values;
-            float[] set = _set;
+            byte[] states = _states;
 
             for ( int i = values.length; i-- > 0; ) {
-                if ( ( set[i] != FREE && set[i] != REMOVED ) && entry == values[i] ) {
+                if ( ( states[i] != FREE && states[i] != REMOVED ) && entry == values[i] ) {
                     removeAt( i );
                     return true;
                 }
             }
             return false;
         }
-
 
         /** {@inheritDoc} */
         public boolean containsAll( Collection<?> collection ) {
@@ -1194,11 +1205,16 @@ public class TFloatByteHashMap extends TFloatByteHash implements TFloatByteMap, 
         for ( int i = values.length; i-- > 0; ) {
             if ( states[i] == FULL ) {
                 float key = _set[i];
+
+                if ( !that.containsKey( key ) ) return false;
+
                 byte that_value = that.get( key );
                 byte this_value = values[i];
-                if ( ( this_value != that_value ) &&
-                     ( this_value != this_no_entry_value ) &&
-                     ( that_value != that_no_entry_value ) ) {
+                if ((this_value != that_value)
+                    && ( (this_value != this_no_entry_value)
+                    || (that_value != that_no_entry_value))
+                    ) {
+
                     return false;
                 }
             }

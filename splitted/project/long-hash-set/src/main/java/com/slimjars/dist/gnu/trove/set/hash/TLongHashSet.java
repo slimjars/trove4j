@@ -132,7 +132,7 @@ public class TLongHashSet extends TLongHash implements TLongSet, Externalizable 
             if ( this.no_entry_value != ( long ) 0 ) {
                 Arrays.fill( _set, this.no_entry_value );
             }
-            setUp( (int) Math.ceil( DEFAULT_CAPACITY / _loadFactor ) );
+            setUp( saturatedCast( fastCeil( DEFAULT_CAPACITY / (double) _loadFactor ) ) );
         }
         addAll( collection );
     }
@@ -158,21 +158,16 @@ public class TLongHashSet extends TLongHash implements TLongSet, Externalizable 
 
     /** {@inheritDoc} */
     public long[] toArray() {
-        long[] result = new long[ size() ];
-        long[] set = _set;
-        byte[] states = _states;
-
-        for ( int i = states.length, j = 0; i-- > 0; ) {
-            if ( states[i] == FULL ) {
-                result[j++] = set[i];
-            }
-        }
-        return result;
+        return toArray( new long[ _size ] );
     }
 
 
     /** {@inheritDoc} */
     public long[] toArray( long[] dest ) {
+        if ( dest.length < _size ) {
+            dest = new long[ _size ];
+        }
+
         long[] set = _set;
         byte[] states = _states;
 

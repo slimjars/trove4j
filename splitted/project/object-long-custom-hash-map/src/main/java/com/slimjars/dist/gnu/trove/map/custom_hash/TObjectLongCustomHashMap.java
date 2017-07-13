@@ -151,14 +151,14 @@ public class TObjectLongCustomHashMap<K> extends TCustomObjectHash<K>
 
         if ( map instanceof TObjectLongCustomHashMap ) {
             TObjectLongCustomHashMap hashmap = ( TObjectLongCustomHashMap ) map;
-            this._loadFactor = hashmap._loadFactor;
+            this._loadFactor = Math.abs( hashmap._loadFactor );
             this.no_entry_value = hashmap.no_entry_value;
             this.strategy = hashmap.strategy;
             //noinspection RedundantCast
             if ( this.no_entry_value != ( long ) 0 ) {
                 Arrays.fill( _values, this.no_entry_value );
             }
-            setUp( (int) Math.ceil( DEFAULT_CAPACITY / _loadFactor ) );
+            setUp( saturatedCast( fastCeil( DEFAULT_CAPACITY / (double) _loadFactor ) ) );
         }
         putAll( map );
     }

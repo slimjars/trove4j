@@ -1,4 +1,5 @@
 dependencies {
+    compile project(':trove4j-hash-functions')
     compile project(':trove4j-object-hash-iterator')
     compile project(':trove4j-object-long-map')
 }

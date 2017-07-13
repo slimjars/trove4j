@@ -1,5 +1,6 @@
 dependencies {
     compile project(':trove4j-char-list')
+    compile project(':trove4j-constants')
     compile project(':trove4j-hash-functions')
 }
 

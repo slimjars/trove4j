@@ -44,13 +44,14 @@ import java.util.*;
  * A resizable, double linked list of short primitives.
  */
 public class TShortLinkedList implements TShortList, Externalizable {
-    short no_entry_value;
-    int size;
+    private short no_entry_value;
+    private int size;
 
-    TShortLink head = null;
-    TShortLink tail = head;
+    private TShortLink head = null;
+    private TShortLink tail = head;
 
     public TShortLinkedList() {
+    	this( Constants.DEFAULT_SHORT_NO_ENTRY_VALUE );
     }
 
     public TShortLinkedList(short no_entry_value) {
@@ -216,7 +217,6 @@ public class TShortLinkedList implements TShortList, Externalizable {
          * @param l
          * @param idx
          * @param offset
-         * @return
          */
         private static TShortLink getLink(TShortLink l, int idx, int offset) {
             return getLink(l, idx, offset, true);
@@ -228,7 +228,6 @@ public class TShortLinkedList implements TShortList, Externalizable {
          * @param idx
          * @param offset
          * @param next
-         * @return
          */
         private static TShortLink getLink(TShortLink l, int idx, int offset, boolean next) {
             int i = idx;
@@ -734,22 +733,22 @@ public class TShortLinkedList implements TShortList, Externalizable {
         }
 
         TShortLink middle;
-        int mid;
         int from = fromIndex;
         TShortLink fromLink = getLinkAt(fromIndex);
-        int to = toIndex;
+        int to = toIndex - 1;
 
-        while (from < to) {
-            mid = (from + to) >>> 1;
+        while (from <= to) {
+            int mid = (from + to) >>> 1;
             middle = getLink(fromLink, from, mid);
-            if (middle.getValue() == value)
-                return mid;
+            short midVal = middle.getValue();
 
-            if (middle.getValue() < value) {
+            if (midVal < value) {
                 from = mid + 1;
                 fromLink = middle.next;
-            } else {
+            }else if (midVal > value) {
                 to = mid - 1;
+            } else {
+                return mid;
             }
         }
 
@@ -763,13 +762,19 @@ public class TShortLinkedList implements TShortList, Externalizable {
 
     /** {@inheritDoc} */
     public int indexOf(int offset, short value) {
+        if ( size == 0 ) return -1;
+
         int count = offset;
-        for (TShortLink l = getLinkAt(offset); got(l.getNext()); l = l.getNext()) {
+
+        TShortLink l;
+        for (l = getLinkAt(offset); got(l.getNext()); l = l.getNext()) {
             if (l.getValue() == value)
                 return count;
 
             count++;
         }
+
+        if ( l != null && l.getValue() == value ) return count;
 
         return -1;
     }
@@ -1004,38 +1009,37 @@ public class TShortLinkedList implements TShortList, Externalizable {
         return ref == null;
     }
 
+
+    // comparing
+
+    /** {@inheritDoc} */
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        TShortLinkedList that = (TShortLinkedList) o;
-
-        if (no_entry_value != that.no_entry_value) return false;
-        if (size != that.size) return false;
-
-        TShortIterator iterator = iterator();
-        TShortIterator thatIterator = that.iterator();
-        while (iterator.hasNext()) {
-            if (!thatIterator.hasNext())
-                return false;
-
-            if (iterator.next() != thatIterator.next())
-                return false;
+    public boolean equals( Object other ) {
+        if ( other == this ) {
+            return true;
         }
+        if ( !( other instanceof TShortList ) ) return false;
 
+        TShortList that = ( TShortList )other;
+        if ( size() != that.size() ) return false;
+
+        for( int i = 0; i < size(); i++ ) {
+            if ( get( i ) != that.get( i ) ) {
+                return false;
+            }
+        }
         return true;
     }
 
+
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
-        int result = HashFunctions.hash(no_entry_value);
-        result = 31 * result + size;
-        for (TShortIterator iterator = iterator(); iterator.hasNext();) {
-            result = 31 * result + HashFunctions.hash(iterator.next());
+        int h = 0;
+        for ( int i = size(); i-- > 0; ) {
+            h += HashFunctions.hash( get( i ) );
         }
-
-        return result;
+        return h;
     }
 
     @Override

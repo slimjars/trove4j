@@ -1,5 +1,6 @@
 dependencies {
     compile project(':trove4j-double-procedure')
+    compile project(':trove4j-hash-functions')
     compile project(':trove4j-primitive-hash')
 }
 

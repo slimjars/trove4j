@@ -131,7 +131,7 @@ public class TDoubleCharHashMap extends TDoubleCharHash implements TDoubleCharMa
         super( map.size() );
         if ( map instanceof TDoubleCharHashMap ) {
             TDoubleCharHashMap hashmap = ( TDoubleCharHashMap ) map;
-            this._loadFactor = hashmap._loadFactor;
+            this._loadFactor = Math.abs( hashmap._loadFactor );
             this.no_entry_key = hashmap.no_entry_key;
             this.no_entry_value = hashmap.no_entry_value;
             //noinspection RedundantCast
@@ -142,7 +142,7 @@ public class TDoubleCharHashMap extends TDoubleCharHash implements TDoubleCharMa
             if ( this.no_entry_value != ( char ) 0 ) {
                 Arrays.fill( _values, this.no_entry_value );
             }
-            setUp( (int) Math.ceil( DEFAULT_CAPACITY / _loadFactor ) );
+            setUp( saturatedCast( fastCeil( DEFAULT_CAPACITY / (double) _loadFactor ) ) );
         }
         putAll( map );
     }
@@ -296,6 +296,9 @@ public class TDoubleCharHashMap extends TDoubleCharHash implements TDoubleCharMa
     /** {@inheritDoc} */
     public double[] keys() {
         double[] keys = new double[size()];
+        if ( keys.length == 0 ) {
+            return keys;        // nothing to copy
+        }
         double[] k = _set;
         byte[] states = _states;
 
@@ -311,6 +314,9 @@ public class TDoubleCharHashMap extends TDoubleCharHash implements TDoubleCharMa
     /** {@inheritDoc} */
     public double[] keys( double[] array ) {
         int size = size();
+        if ( size == 0 ) {
+            return array;       // nothing to copy
+        }
         if ( array.length < size ) {
             array = new double[size];
         }
@@ -336,6 +342,9 @@ public class TDoubleCharHashMap extends TDoubleCharHash implements TDoubleCharMa
     /** {@inheritDoc} */
     public char[] values() {
         char[] vals = new char[size()];
+        if ( vals.length == 0 ) {
+            return vals;        // nothing to copy
+        }
         char[] v = _values;
         byte[] states = _states;
 
@@ -351,6 +360,9 @@ public class TDoubleCharHashMap extends TDoubleCharHash implements TDoubleCharMa
     /** {@inheritDoc} */
     public char[] values( char[] array ) {
         int size = size();
+        if ( size == 0 ) {
+            return array;       // nothing to copy
+        }
         if ( array.length < size ) {
             array = new char[size];
         }
@@ -852,17 +864,16 @@ public class TDoubleCharHashMap extends TDoubleCharHash implements TDoubleCharMa
         /** {@inheritDoc} */
         public boolean remove( char entry ) {
             char[] values = _values;
-            double[] set = _set;
+            byte[] states = _states;
 
             for ( int i = values.length; i-- > 0; ) {
-                if ( ( set[i] != FREE && set[i] != REMOVED ) && entry == values[i] ) {
+                if ( ( states[i] != FREE && states[i] != REMOVED ) && entry == values[i] ) {
                     removeAt( i );
                     return true;
                 }
             }
             return false;
         }
-
 
         /** {@inheritDoc} */
         public boolean containsAll( Collection<?> collection ) {
@@ -1194,11 +1205,16 @@ public class TDoubleCharHashMap extends TDoubleCharHash implements TDoubleCharMa
         for ( int i = values.length; i-- > 0; ) {
             if ( states[i] == FULL ) {
                 double key = _set[i];
+
+                if ( !that.containsKey( key ) ) return false;
+
                 char that_value = that.get( key );
                 char this_value = values[i];
-                if ( ( this_value != that_value ) &&
-                     ( this_value != this_no_entry_value ) &&
-                     ( that_value != that_no_entry_value ) ) {
+                if ((this_value != that_value)
+                    && ( (this_value != this_no_entry_value)
+                    || (that_value != that_no_entry_value))
+                    ) {
+
                     return false;
                 }
             }

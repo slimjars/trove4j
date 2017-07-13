@@ -39,7 +39,7 @@ public interface TCharCharMap {
     /**
      * Returns the value that will be returned from {@link #get} or {@link #put} if no
      * entry exists for a given key. The default value is generally zero, but can be
-     * changed during construction of the collection.
+     * configured during construction of the collection.
      *
      * @return the value that represents a null key in this collection.
      */
@@ -49,7 +49,7 @@ public interface TCharCharMap {
     /**
      * Returns the value that will be returned from {@link #get} or {@link #put} if no
      * entry exists for a given key. The default value is generally zero, but can be
-     * changed during construction of the collection.
+     * configured during construction of the collection.
      *
      * @return the value that represents a null value in this collection.
      */
@@ -58,9 +58,6 @@ public interface TCharCharMap {
 
     /**
      * Inserts a key/value pair into the map.
-     *
-     * @param key an <code>char</code> value
-     * @param value an <code>char</code> value
      *
      * @return the previous value associated with <tt>key</tt>, or the "no entry" value
      *         if none was found (see {@link #getNoEntryValue}).
@@ -71,9 +68,6 @@ public interface TCharCharMap {
     /**
      * Inserts a key/value pair into the map if the specified key is not already
      * associated with a value.
-     *
-     * @param key an <code>char</code> value
-     * @param value an <code>char</code> value
      *
      * @return the previous value associated with <tt>key</tt>, or the "no entry" value
      *         if none was found (see {@link #getNoEntryValue}).
@@ -98,9 +92,7 @@ public interface TCharCharMap {
 
 
     /**
-     * Retrieves the value for <tt>key</tt>
-     *
-     * @param key an <code>char</code> value
+     * Retrieves the value for <tt>key</tt>.
      *
      * @return the previous value associated with <tt>key</tt>, or the "no entry" value
      *         if none was found (see {@link #getNoEntryValue}).
@@ -197,18 +189,12 @@ public interface TCharCharMap {
 
     /**
      * Checks for the presence of <tt>val</tt> in the values of the map.
-     *
-     * @param val an <code>char</code> value
-     * @return a <code>boolean</code> value
      */
     public boolean containsValue( char val );
 
 
     /**
      * Checks for the present of <tt>key</tt> in the keys of the map.
-     *
-     * @param key an <code>char</code> value
-     * @return a <code>boolean</code> value
      */
     public boolean containsKey( char key );
 
@@ -289,11 +275,11 @@ public interface TCharCharMap {
 
     /**
      * Adjusts the primitive value mapped to the key if the key is present in the map.
-     * Otherwise, the <tt>initial_value</tt> is put in the map.
+     * Otherwise, the <tt>put_amount</tt> is put in the map.
      *
      * @param key the key of the value to increment
      * @param adjust_amount the amount to adjust the value by
-     * @param put_amount the value put into the map if the key is not initial present
+     * @param put_amount the value put into the map if the key is not present
      *
      * @return the value present in the map after the adjustment or put operation
      */

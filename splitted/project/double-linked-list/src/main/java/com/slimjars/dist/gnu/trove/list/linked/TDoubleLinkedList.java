@@ -44,13 +44,14 @@ import java.util.*;
  * A resizable, double linked list of double primitives.
  */
 public class TDoubleLinkedList implements TDoubleList, Externalizable {
-    double no_entry_value;
-    int size;
+    private double no_entry_value;
+    private int size;
 
-    TDoubleLink head = null;
-    TDoubleLink tail = head;
+    private TDoubleLink head = null;
+    private TDoubleLink tail = head;
 
     public TDoubleLinkedList() {
+    	this( Constants.DEFAULT_DOUBLE_NO_ENTRY_VALUE );
     }
 
     public TDoubleLinkedList(double no_entry_value) {
@@ -216,7 +217,6 @@ public class TDoubleLinkedList implements TDoubleList, Externalizable {
          * @param l
          * @param idx
          * @param offset
-         * @return
          */
         private static TDoubleLink getLink(TDoubleLink l, int idx, int offset) {
             return getLink(l, idx, offset, true);
@@ -228,7 +228,6 @@ public class TDoubleLinkedList implements TDoubleList, Externalizable {
          * @param idx
          * @param offset
          * @param next
-         * @return
          */
         private static TDoubleLink getLink(TDoubleLink l, int idx, int offset, boolean next) {
             int i = idx;
@@ -734,22 +733,22 @@ public class TDoubleLinkedList implements TDoubleList, Externalizable {
         }
 
         TDoubleLink middle;
-        int mid;
         int from = fromIndex;
         TDoubleLink fromLink = getLinkAt(fromIndex);
-        int to = toIndex;
+        int to = toIndex - 1;
 
-        while (from < to) {
-            mid = (from + to) >>> 1;
+        while (from <= to) {
+            int mid = (from + to) >>> 1;
             middle = getLink(fromLink, from, mid);
-            if (middle.getValue() == value)
-                return mid;
+            double midVal = middle.getValue();
 
-            if (middle.getValue() < value) {
+            if (midVal < value) {
                 from = mid + 1;
                 fromLink = middle.next;
-            } else {
+            }else if (midVal > value) {
                 to = mid - 1;
+            } else {
+                return mid;
             }
         }
 
@@ -763,13 +762,19 @@ public class TDoubleLinkedList implements TDoubleList, Externalizable {
 
     /** {@inheritDoc} */
     public int indexOf(int offset, double value) {
+        if ( size == 0 ) return -1;
+
         int count = offset;
-        for (TDoubleLink l = getLinkAt(offset); got(l.getNext()); l = l.getNext()) {
+
+        TDoubleLink l;
+        for (l = getLinkAt(offset); got(l.getNext()); l = l.getNext()) {
             if (l.getValue() == value)
                 return count;
 
             count++;
         }
+
+        if ( l != null && l.getValue() == value ) return count;
 
         return -1;
     }
@@ -1004,38 +1009,37 @@ public class TDoubleLinkedList implements TDoubleList, Externalizable {
         return ref == null;
     }
 
+
+    // comparing
+
+    /** {@inheritDoc} */
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        TDoubleLinkedList that = (TDoubleLinkedList) o;
-
-        if (no_entry_value != that.no_entry_value) return false;
-        if (size != that.size) return false;
-
-        TDoubleIterator iterator = iterator();
-        TDoubleIterator thatIterator = that.iterator();
-        while (iterator.hasNext()) {
-            if (!thatIterator.hasNext())
-                return false;
-
-            if (iterator.next() != thatIterator.next())
-                return false;
+    public boolean equals( Object other ) {
+        if ( other == this ) {
+            return true;
         }
+        if ( !( other instanceof TDoubleList ) ) return false;
 
+        TDoubleList that = ( TDoubleList )other;
+        if ( size() != that.size() ) return false;
+
+        for( int i = 0; i < size(); i++ ) {
+            if ( get( i ) != that.get( i ) ) {
+                return false;
+            }
+        }
         return true;
     }
 
+
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
-        int result = HashFunctions.hash(no_entry_value);
-        result = 31 * result + size;
-        for (TDoubleIterator iterator = iterator(); iterator.hasNext();) {
-            result = 31 * result + HashFunctions.hash(iterator.next());
+        int h = 0;
+        for ( int i = size(); i-- > 0; ) {
+            h += HashFunctions.hash( get( i ) );
         }
-
-        return result;
+        return h;
     }
 
     @Override

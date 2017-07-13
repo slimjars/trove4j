@@ -1,6 +1,5 @@
 dependencies {
     compile project(':trove4j-constants')
-    compile project(':trove4j-hash-functions')
     compile project(':trove4j-prime-finder')
 }
 

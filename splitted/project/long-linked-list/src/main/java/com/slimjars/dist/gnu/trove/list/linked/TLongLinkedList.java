@@ -44,13 +44,14 @@ import java.util.*;
  * A resizable, double linked list of long primitives.
  */
 public class TLongLinkedList implements TLongList, Externalizable {
-    long no_entry_value;
-    int size;
+    private long no_entry_value;
+    private int size;
 
-    TLongLink head = null;
-    TLongLink tail = head;
+    private TLongLink head = null;
+    private TLongLink tail = head;
 
     public TLongLinkedList() {
+    	this( Constants.DEFAULT_LONG_NO_ENTRY_VALUE );
     }
 
     public TLongLinkedList(long no_entry_value) {
@@ -216,7 +217,6 @@ public class TLongLinkedList implements TLongList, Externalizable {
          * @param l
          * @param idx
          * @param offset
-         * @return
          */
         private static TLongLink getLink(TLongLink l, int idx, int offset) {
             return getLink(l, idx, offset, true);
@@ -228,7 +228,6 @@ public class TLongLinkedList implements TLongList, Externalizable {
          * @param idx
          * @param offset
          * @param next
-         * @return
          */
         private static TLongLink getLink(TLongLink l, int idx, int offset, boolean next) {
             int i = idx;
@@ -734,22 +733,22 @@ public class TLongLinkedList implements TLongList, Externalizable {
         }
 
         TLongLink middle;
-        int mid;
         int from = fromIndex;
         TLongLink fromLink = getLinkAt(fromIndex);
-        int to = toIndex;
+        int to = toIndex - 1;
 
-        while (from < to) {
-            mid = (from + to) >>> 1;
+        while (from <= to) {
+            int mid = (from + to) >>> 1;
             middle = getLink(fromLink, from, mid);
-            if (middle.getValue() == value)
-                return mid;
+            long midVal = middle.getValue();
 
-            if (middle.getValue() < value) {
+            if (midVal < value) {
                 from = mid + 1;
                 fromLink = middle.next;
-            } else {
+            }else if (midVal > value) {
                 to = mid - 1;
+            } else {
+                return mid;
             }
         }
 
@@ -763,13 +762,19 @@ public class TLongLinkedList implements TLongList, Externalizable {
 
     /** {@inheritDoc} */
     public int indexOf(int offset, long value) {
+        if ( size == 0 ) return -1;
+
         int count = offset;
-        for (TLongLink l = getLinkAt(offset); got(l.getNext()); l = l.getNext()) {
+
+        TLongLink l;
+        for (l = getLinkAt(offset); got(l.getNext()); l = l.getNext()) {
             if (l.getValue() == value)
                 return count;
 
             count++;
         }
+
+        if ( l != null && l.getValue() == value ) return count;
 
         return -1;
     }
@@ -1004,38 +1009,37 @@ public class TLongLinkedList implements TLongList, Externalizable {
         return ref == null;
     }
 
+
+    // comparing
+
+    /** {@inheritDoc} */
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        TLongLinkedList that = (TLongLinkedList) o;
-
-        if (no_entry_value != that.no_entry_value) return false;
-        if (size != that.size) return false;
-
-        TLongIterator iterator = iterator();
-        TLongIterator thatIterator = that.iterator();
-        while (iterator.hasNext()) {
-            if (!thatIterator.hasNext())
-                return false;
-
-            if (iterator.next() != thatIterator.next())
-                return false;
+    public boolean equals( Object other ) {
+        if ( other == this ) {
+            return true;
         }
+        if ( !( other instanceof TLongList ) ) return false;
 
+        TLongList that = ( TLongList )other;
+        if ( size() != that.size() ) return false;
+
+        for( int i = 0; i < size(); i++ ) {
+            if ( get( i ) != that.get( i ) ) {
+                return false;
+            }
+        }
         return true;
     }
 
+
+    /** {@inheritDoc} */
     @Override
     public int hashCode() {
-        int result = HashFunctions.hash(no_entry_value);
-        result = 31 * result + size;
-        for (TLongIterator iterator = iterator(); iterator.hasNext();) {
-            result = 31 * result + HashFunctions.hash(iterator.next());
+        int h = 0;
+        for ( int i = size(); i-- > 0; ) {
+            h += HashFunctions.hash( get( i ) );
         }
-
-        return result;
+        return h;
     }
 
     @Override

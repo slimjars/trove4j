@@ -47,7 +47,7 @@ public interface TByteSet extends TByteCollection {
 
     /**
      * Returns the value that is used to represent null. The default
-     * value is generally zero, but can be changed during construction
+     * value is generally zero, but can be configured during construction
      * of the collection.
      *
      * @return the value that represents null

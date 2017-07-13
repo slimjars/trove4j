@@ -132,7 +132,7 @@ public class TCharHashSet extends TCharHash implements TCharSet, Externalizable 
             if ( this.no_entry_value != ( char ) 0 ) {
                 Arrays.fill( _set, this.no_entry_value );
             }
-            setUp( (int) Math.ceil( DEFAULT_CAPACITY / _loadFactor ) );
+            setUp( saturatedCast( fastCeil( DEFAULT_CAPACITY / (double) _loadFactor ) ) );
         }
         addAll( collection );
     }
@@ -158,21 +158,16 @@ public class TCharHashSet extends TCharHash implements TCharSet, Externalizable 
 
     /** {@inheritDoc} */
     public char[] toArray() {
-        char[] result = new char[ size() ];
-        char[] set = _set;
-        byte[] states = _states;
-
-        for ( int i = states.length, j = 0; i-- > 0; ) {
-            if ( states[i] == FULL ) {
-                result[j++] = set[i];
-            }
-        }
-        return result;
+        return toArray( new char[ _size ] );
     }
 
 
     /** {@inheritDoc} */
     public char[] toArray( char[] dest ) {
+        if ( dest.length < _size ) {
+            dest = new char[ _size ];
+        }
+
         char[] set = _set;
         byte[] states = _states;
 
