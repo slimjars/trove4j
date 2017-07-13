@@ -12,6 +12,13 @@ subprojects {
     apply plugin: 'eclipse'
     apply plugin: 'maven'
 
+    sourceCompatibility = 1.5
+    targetCompatibility = 1.5
+
+    compileJava {
+        options.bootClasspath = project.jdk5rtjar
+    }
+
     repositories {
         mavenCentral()
     }
